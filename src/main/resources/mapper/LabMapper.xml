@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zstu.dao.LabMapper">
+  <resultMap id="BaseResultMap" type="com.zstu.bean.Lab">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lab_num" jdbcType="VARCHAR" property="labNum" />
+    <result column="lab_type" jdbcType="VARCHAR" property="labType" />
+    <result column="lab_cap" jdbcType="INTEGER" property="labCap" />
+    <result column="locate" jdbcType="VARCHAR" property="locate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, lab_num, lab_type, lab_cap, locate
+  </sql>
+  <select id="selectByExample" parameterType="com.zstu.bean.LabExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lab
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lab
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lab
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zstu.bean.LabExample">
+    delete from lab
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zstu.bean.Lab">
+    insert into lab (id, lab_num, lab_type, 
+      lab_cap, locate)
+    values (#{id,jdbcType=INTEGER}, #{labNum,jdbcType=VARCHAR}, #{labType,jdbcType=VARCHAR}, 
+      #{labCap,jdbcType=INTEGER}, #{locate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zstu.bean.Lab">
+    insert into lab
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="labNum != null">
+        lab_num,
+      </if>
+      <if test="labType != null">
+        lab_type,
+      </if>
+      <if test="labCap != null">
+        lab_cap,
+      </if>
+      <if test="locate != null">
+        locate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="labNum != null">
+        #{labNum,jdbcType=VARCHAR},
+      </if>
+      <if test="labType != null">
+        #{labType,jdbcType=VARCHAR},
+      </if>
+      <if test="labCap != null">
+        #{labCap,jdbcType=INTEGER},
+      </if>
+      <if test="locate != null">
+        #{locate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zstu.bean.LabExample" resultType="java.lang.Long">
+    select count(*) from lab
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update lab
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.labNum != null">
+        lab_num = #{record.labNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labType != null">
+        lab_type = #{record.labType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labCap != null">
+        lab_cap = #{record.labCap,jdbcType=INTEGER},
+      </if>
+      <if test="record.locate != null">
+        locate = #{record.locate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update lab
+    set id = #{record.id,jdbcType=INTEGER},
+      lab_num = #{record.labNum,jdbcType=VARCHAR},
+      lab_type = #{record.labType,jdbcType=VARCHAR},
+      lab_cap = #{record.labCap,jdbcType=INTEGER},
+      locate = #{record.locate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zstu.bean.Lab">
+    update lab
+    <set>
+      <if test="labNum != null">
+        lab_num = #{labNum,jdbcType=VARCHAR},
+      </if>
+      <if test="labType != null">
+        lab_type = #{labType,jdbcType=VARCHAR},
+      </if>
+      <if test="labCap != null">
+        lab_cap = #{labCap,jdbcType=INTEGER},
+      </if>
+      <if test="locate != null">
+        locate = #{locate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zstu.bean.Lab">
+    update lab
+    set lab_num = #{labNum,jdbcType=VARCHAR},
+      lab_type = #{labType,jdbcType=VARCHAR},
+      lab_cap = #{labCap,jdbcType=INTEGER},
+      locate = #{locate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--数据库驱动 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!--数据库链接地址账号密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost/zstu" userId="root" password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!--生成Model类存放位置 -->
+		<javaModelGenerator targetPackage="com.zstu.bean"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!--生成映射文件存放位置 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--生成Dao类存放位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.zstu.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!--生成对应表及类名 -->
+		<!-- 
+		<table tableName="course_student" domainObjectName="Course_Student"></table>
+		<table tableName="courses" domainObjectName="Courses"></table>
+		<table tableName="lab" domainObjectName="Lab"></table>
+		<table tableName="messages" domainObjectName="Messages"></table>
+		<table tableName="messs_send_to_stu" domainObjectName="Messs_Send_To_Stu"></table>
+		<table tableName="authority_role" domainObjectName="Authority_Role"></table>
+		<table tableName="authority" domainObjectName="Authority"></table>
+		<table tableName="role" domainObjectName="Role"></table>
+		<table tableName="student" domainObjectName="Student"></table>
+		<table tableName="teacher" domainObjectName="Teacher"></table>
+		<table tableName="teacher_role" domainObjectName="Teacher_Role"></table>
+		 -->
+		<table tableName="reports" domainObjectName="Reports"></table>
+		<table tableName="stu_submit_to_teacher" domainObjectName="Stu_Submit_To_Teacher"></table>
+		<table tableName="material" domainObjectName="Material"></table>
+	</context>
+</generatorConfiguration>
